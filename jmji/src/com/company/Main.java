@@ -28,6 +28,7 @@ public class Main {
                 String lineConvert = EmojiParser.parseToUnicode(line);
                 worker.identifyLine(lineConvert, lineCounter);
                 lineCounter=lineCounter+1;
+
             }
         }
     }
@@ -35,9 +36,14 @@ public class Main {
 
 class JMoji
 {
+    public String finalCode;
+    public ArrayList<String> identifiers;
+
+
     public JMoji()
     {
-
+        finalCode = "";
+        identifiers = new ArrayList<String>();
     }
 
     public void identifyLine(String arr, int lineCounter)
@@ -53,12 +59,12 @@ class JMoji
 		 switch(splitArr[0]) {
 			 case "": //System.out.println("Whitespace"); //Ignores whitespace
 					break;
-            case ":yin_yang:": parseBool(arr);
+            case ":yin_yang:": parseBool(arr, lineCounter);
                      break;
             default:
                 switch(EmojiParser.parseToAliases(splitArr[0]+splitArr[1]))
                 {
-                    case ":1234:":parseInt(arr);
+                    case ":1234:":parseInt(splitArr);
                         break;
                     default:System.out.println("ERROR IN LINE "+lineCounter+". INVALID FIRST CHARACTER.");
                         break;
@@ -67,15 +73,62 @@ class JMoji
 		 }
     }
 
-    private void parseBool(String arr)
+    private void parseBool(String arr, int lineCounter)
     {
         System.out.println("Identified boolean.");
+        String parsed = EmojiParser.parseToAliases(arr);
+        String[] splitArr = parsed.split(":"); //split by character
+        String identifier = ":"+splitArr[3]+":";
+        identifiers.add(identifier);
+        if(splitArr[5].equals("rainbow"))
+        {
+            if(splitArr[7].equals("white_circle"))
+            {
+                finalCode += "bool "+splitArr[3]+" = true;";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[7].equals("black_circle"))
+            {
+                finalCode += "bool "+splitArr[3]+" = false;";
+                System.out.println(finalCode);
+            }
+            else
+            {
+                System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+                System.out.println("BOOLEAN MUST BE INITIALIZED TO ⚪ OR FALSE ⚫");
+            }
+        }
+        else
+        {
+            System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+        }
     }
 
-    private void parseInt(String arr)
+    private void parseInt(String[] arr)
     {
 
         System.out.println("Identified integer.");
+    }
+
+    //checks to make sure emoji used isn't a key
+    private void checkIfKey(String testE)
+    {
+
+        switch(testE) {
+            case "": //System.out.println("Whitespace"); //Ignores whitespace
+                break;
+            case ":yin_yang:":
+                break;
+            default:
+                switch(EmojiParser.parseToAliases(testE))
+                {
+                    case ":1234:":
+                        break;
+                    default:System.out.println("ERROR IN LINE "+0000+". INVALID FIRST CHARACTER.");
+                        break;
+                }
+                break;
+        }
     }
 
 
