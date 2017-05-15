@@ -31,65 +31,117 @@ public class Main {
 
             }
         }
+
+        //right now this only outputs a file, but does nothing more.
+        String code = worker.getFinalCode();
+        try{
+            PrintWriter writer = new PrintWriter("emojicode.java", "UTF-8");
+            writer.println(code);
+            writer.close();
+        } catch (IOException e) {
+            // do something
+        }
+
     }
 }
 
 class JMoji
 {
     public String finalCode;
-    public ArrayList<String> identifiers;
+    public ArrayList<idCollector> identifiers;
 
 
     public JMoji()
     {
         finalCode = "";
-        identifiers = new ArrayList<String>();
+        identifiers = new ArrayList<idCollector>();
+    }
+
+    public String getFinalCode()
+    {
+        return finalCode;
     }
 
     public void identifyLine(String arr, int lineCounter)
     {
         System.out.println(arr);
-        String[] splitArr = arr.split("(?!^)"); //split by character
-        for(int i = 0; i<splitArr.length; ++i)
+        String parsed = EmojiParser.parseToAliases(arr); //create string of names
+        String[] splitArr = parsed.split(":"); //split by colon identifier
+
+        boolean needID = true;
+        for(int id=0;id<identifiers.size();++id)
         {
-            splitArr[i] =EmojiParser.parseToAliases(splitArr[i]);
+            if(splitArr[1].equals(identifiers.get(id).getName()))
+            {
+                if(splitArr[3].equals("rainbow")) {
+                    if (identifiers.get(id).getType().equals("boolean")) {
+                        reassignBool(splitArr, lineCounter);
+                        needID = false;
+                        break;
+                    }
+                }
+            }
         }
 
-        //Note: Some emojis consist of two or more characters, thus the nestled switch.
-		 switch(splitArr[0]) {
-			 case "": //System.out.println("Whitespace"); //Ignores whitespace
-					break;
-            case ":yin_yang:": parseBool(arr, lineCounter);
-                     break;
-            default:
-                switch(EmojiParser.parseToAliases(splitArr[0]+splitArr[1]))
-                {
-                    case ":1234:":parseInt(splitArr);
-                        break;
-                    default:System.out.println("ERROR IN LINE "+lineCounter+". INVALID FIRST CHARACTER.");
-                        break;
-                }
-                     break;
-		 }
+        if(needID == true) {
+            switch (splitArr[1]) {
+                case "": //System.out.println("Whitespace"); //Ignores whitespace
+                    break;
+                case "yin_yang":
+                    parseBool(splitArr, lineCounter);
+                    break;
+                case "1234":
+                    parseInt(splitArr);
+                    break;
+                default:
+                    System.out.println("ERROR IN LINE " + lineCounter + ". INVALID FIRST CHARACTER.");
+                    break;
+            }
+        }
     }
 
-    private void parseBool(String arr, int lineCounter)
+    private void parseBool(String[] splitArr, int lineCounter)
     {
         System.out.println("Identified boolean.");
-        String parsed = EmojiParser.parseToAliases(arr);
-        String[] splitArr = parsed.split(":"); //split by character
-        String identifier = ":"+splitArr[3]+":";
-        identifiers.add(identifier);
+
+        String identifier = splitArr[3]; //should be second
+        identifiers.add(new idCollector(identifier, "boolean"));
         if(splitArr[5].equals("rainbow"))
         {
             if(splitArr[7].equals("white_circle"))
             {
-                finalCode += "bool "+splitArr[3]+" = true;";
+                finalCode += "bool "+splitArr[3]+" = true;\n";
                 System.out.println(finalCode);
             }
             else if(splitArr[7].equals("black_circle"))
             {
-                finalCode += "bool "+splitArr[3]+" = false;";
+                finalCode += "bool "+splitArr[3]+" = false;\n";
+                System.out.println(finalCode);
+            }
+            else
+            {
+                System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+                System.out.println("BOOLEAN MUST BE INITIALIZED TO ⚪ OR FALSE ⚫");
+            }
+        }
+        else
+        {
+            System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+        }
+    }
+
+    private void reassignBool(String[] arr, int lineCounter)
+    {
+        if(arr[3].equals("rainbow"))
+        {
+            if(arr[5].equals("white_circle"))
+            {
+                finalCode += arr[1]+" = true;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[5].equals("black_circle"))
+            {
+                finalCode += arr[1]+" = false;\n";
                 System.out.println(finalCode);
             }
             else
@@ -132,4 +184,25 @@ class JMoji
     }
 
 
+}
+
+class idCollector
+{
+    String name;
+    String type;
+    public idCollector(String nameIn, String typeIn)
+    {
+        name = nameIn;
+        type = typeIn;
+    }
+
+    public String getName()
+    {
+        return name;
+    }
+
+    public String getType()
+    {
+        return type;
+    }
 }
