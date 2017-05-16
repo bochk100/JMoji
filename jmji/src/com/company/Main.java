@@ -67,15 +67,20 @@ class JMoji
         System.out.println(arr);
         String parsed = EmojiParser.parseToAliases(arr); //create string of names
         String[] splitArr = parsed.split(":"); //split by colon identifier
+        System.out.println(parsed);
 
         boolean needID = true;
         for(int id=0;id<identifiers.size();++id)
         {
-            if(splitArr[1].equals(identifiers.get(id).getName()))
-            {
-                if(splitArr[3].equals("rainbow")) {
+            if(splitArr[1].equals(identifiers.get(id).getName())) {
+                if (splitArr[3].equals("rainbow")) {
                     if (identifiers.get(id).getType().equals("boolean")) {
                         reassignBool(splitArr, lineCounter);
+                        needID = false;
+                        break;
+                    }
+                    else if (identifiers.get(id).getType().equals("integer")) {
+                        reassignInt(splitArr, lineCounter);
                         needID = false;
                         break;
                     }
@@ -91,10 +96,10 @@ class JMoji
                     parseBool(splitArr, lineCounter);
                     break;
                 case "1234":
-                    parseInt(splitArr);
+                    parseInt(splitArr, lineCounter);
                     break;
                 default:
-                    System.out.println("ERROR IN LINE " + lineCounter + ". INVALID FIRST CHARACTER.");
+                    System.out.println("ERROR IN LINE " + lineCounter + ". INVALID FIRST CHARACTER.\n");
                     break;
             }
         }
@@ -120,16 +125,85 @@ class JMoji
             }
             else
             {
-                System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
-                System.out.println("BOOLEAN MUST BE INITIALIZED TO ⚪ OR FALSE ⚫");
+                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+                System.out.println("BOOLEAN MUST BE INITIALIZED TO TRUE ⚪ OR FALSE ⚫");
             }
         }
         else
         {
-            System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+            System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
         }
     }
+    private void parseInt(String[] splitArr, int lineCounter)
+    {
 
+        System.out.println("Identified integer.");
+        String identifier = splitArr[3]; //should be second
+        identifiers.add(new idCollector(identifier, "integer"));
+        if(splitArr[5].equals("rainbow"))
+        {
+            // Only has integers 1 through 9 because emojis only go from 0 through 9
+            if(splitArr[6].equals("0"))
+            {
+                finalCode += "int "+splitArr[3]+" = 0;\n";
+                System.out.println(finalCode);
+            }
+            if(splitArr[6].equals("1"))
+            {
+                finalCode += "int "+splitArr[3]+" = 1;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("2"))
+            {
+                finalCode += "int "+splitArr[3]+" = 2;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("3"))
+            {
+                finalCode += "int "+splitArr[3]+" = 3;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("4"))
+            {
+                finalCode += "int "+splitArr[3]+" = 4;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("5"))
+            {
+                finalCode += "int "+splitArr[3]+" = 5;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("6"))
+            {
+                finalCode += "int "+splitArr[3]+" = 6;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("7"))
+            {
+                finalCode += "int "+splitArr[3]+" = 7;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("8"))
+            {
+                finalCode += "int "+splitArr[3]+" = 8;\n";
+                System.out.println(finalCode);
+            }
+            else if(splitArr[6].equals("9"))
+            {
+                finalCode += "int "+splitArr[3]+" = 9;\n";
+                System.out.println(finalCode);
+            }
+            else
+            {
+                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+                System.out.println("INT MUST BE SET TO 0 THROUGH 9\n");
+            }
+        }
+        else
+        {
+            System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+        }
+    }
     private void reassignBool(String[] arr, int lineCounter)
     {
         if(arr[3].equals("rainbow"))
@@ -146,20 +220,79 @@ class JMoji
             }
             else
             {
-                System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
-                System.out.println("BOOLEAN MUST BE INITIALIZED TO ⚪ OR FALSE ⚫");
+                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+                System.out.println("BOOLEAN MUST BE INITIALIZED TO TRUE ⚪ OR FALSE ⚫");
             }
         }
         else
         {
-            System.out.println("INCORRECT SYTNTAX AT LINE "+lineCounter);
+            System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
         }
     }
-
-    private void parseInt(String[] arr)
+    private void reassignInt(String[] arr, int lineCounter)
     {
-
-        System.out.println("Identified integer.");
+        if(arr[3].equals("rainbow"))
+        {
+            if(arr[4].equals("0"))
+            {
+                finalCode += arr[1]+" = 0;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("1"))
+            {
+                finalCode += arr[1]+" = 1;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("2"))
+            {
+                finalCode += arr[1]+" = 2;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("3"))
+            {
+                finalCode += arr[1]+" = 3;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("4"))
+            {
+                finalCode += arr[1]+" = 4;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("5"))
+            {
+                finalCode += arr[1]+" = 5;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("6"))
+            {
+                finalCode += arr[1]+" = 6;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("7"))
+            {
+                finalCode += arr[1]+" = 7;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("8"))
+            {
+                finalCode += arr[1]+" = 8;\n";
+                System.out.println(finalCode);
+            }
+            else if(arr[4].equals("9"))
+            {
+                finalCode += arr[1]+" = 9;\n";
+                System.out.println(finalCode);
+            }
+            else
+            {
+                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+                System.out.println("INT MUST BE SET TO 0 THROUGH 9\n");
+            }
+        }
+        else
+        {
+            System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+        }
     }
 
     //checks to make sure emoji used isn't a key
@@ -176,7 +309,7 @@ class JMoji
                 {
                     case ":1234:":
                         break;
-                    default:System.out.println("ERROR IN LINE "+0000+". INVALID FIRST CHARACTER.");
+                    default:System.out.println("ERROR IN LINE "+0000+". INVALID FIRST CHARACTER.\n");
                         break;
                 }
                 break;
