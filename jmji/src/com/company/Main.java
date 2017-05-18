@@ -28,19 +28,21 @@ public class Main {
                 String lineConvert = EmojiParser.parseToUnicode(line);
                 worker.identifyLine(lineConvert, lineCounter);
                 lineCounter=lineCounter+1;
-
             }
         }
 
         //right now this only outputs a file, but does nothing more.
         String code = worker.getFinalCode();
+        code+="}\n}";
         try{
-            PrintWriter writer = new PrintWriter("emojicode.java", "UTF-8");
+            PrintWriter writer = new PrintWriter("C:\\Users\\Sophie\\Desktop\\JMoji\\jmji\\src\\com\\company\\emojicode.java", "UTF-8");
             writer.println(code);
             writer.close();
         } catch (IOException e) {
             // do something
         }
+
+        emojicode.main(args);
 
     }
 }
@@ -53,7 +55,7 @@ class JMoji
 
     public JMoji()
     {
-        finalCode = "";
+        finalCode = "package com.company;\npublic class emojicode {\npublic static void main (String args[])\n{\n";
         identifiers = new ArrayList<idCollector>();
     }
 
@@ -92,11 +94,19 @@ class JMoji
             switch (splitArr[1]) {
                 case "": //System.out.println("Whitespace"); //Ignores whitespace
                     break;
+                //primitves
                 case "yin_yang":
                     parseBool(splitArr, lineCounter);
                     break;
                 case "1234":
                     parseInt(splitArr, lineCounter);
+                    break;
+                //Method declarations
+                // case "void":
+
+                //other functions
+                case "printer":
+                    printOut(splitArr, lineCounter);
                     break;
                 default:
                     System.out.println("ERROR IN LINE " + lineCounter + ". INVALID FIRST CHARACTER.\n");
@@ -105,6 +115,8 @@ class JMoji
         }
     }
 
+
+    //methods for primitives
     private void parseBool(String[] splitArr, int lineCounter)
     {
         System.out.println("Identified boolean.");
@@ -115,12 +127,12 @@ class JMoji
         {
             if(splitArr[7].equals("white_circle"))
             {
-                finalCode += "bool "+splitArr[3]+" = true;\n";
+                finalCode += "boolean "+splitArr[3]+" = true;\n";
                 System.out.println(finalCode);
             }
             else if(splitArr[7].equals("black_circle"))
             {
-                finalCode += "bool "+splitArr[3]+" = false;\n";
+                finalCode += "boolean "+splitArr[3]+" = false;\n";
                 System.out.println(finalCode);
             }
             else
@@ -294,6 +306,20 @@ class JMoji
             System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
         }
     }
+
+    //System.out.println
+    public void printOut(String[] arr, int lineCounter)
+    {
+        if(arr.length>=3) {
+            finalCode += "System.out.println(" + arr[3] + ");\n";
+        }
+        else
+        {
+            System.out.println("ERROR AT LINE "+lineCounter);
+        }
+    }
+
+
 
     //checks to make sure emoji used isn't a key
     private void checkIfKey(String testE)

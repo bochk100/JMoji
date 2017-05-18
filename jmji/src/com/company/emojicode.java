@@ -1,3 +1,4 @@
+package com.company;
 public class emojicode {
 public static void main (String args[])
 {
