@@ -38,21 +38,21 @@ Loop declarations are as follows:<br>
 (Which translates to for(int candy = 0; candy < 10; candy = candy +1) )<br>
 
 3. List of Tokens<br>
-<br>
+
 *primitives*<br>
 bool: ☯️<br>
 int: 🔢<br>
 <br><br>
 *declarations*<br>
 equals(=): 🌈<br>
-<br><br>
+
 *methods*<br>
 void = 🕳<br>
 open bracket ("{"): 🌜<br>
 closed bracket ("}"): 🌛<br>
-<br><br>
+
 *loops*<br>
 for loop: 🔁<br>
-<br><br>
+
 *other*<br>
 print to console: 🖨<br>
