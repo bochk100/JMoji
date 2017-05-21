@@ -101,6 +101,10 @@ class JMoji
                 case "1234":
                     parseInt(splitArr, lineCounter);
                     break;
+                //loops
+                case "repeat":
+                    forLoop(splitArr,lineCounter);
+                    break;
                 //Method declarations
                 // case "void":
                 case "hole":
@@ -326,6 +330,13 @@ class JMoji
         {
             System.out.println("ERROR AT LINE "+lineCounter);
         }
+    }
+
+    public void forLoop(String[] arr, int lineCounter)
+    {
+        identifiers.add(new idCollector(arr[1], "integer"));
+        finalCode += "for(int "+arr[3]+"="+arr[4]+";"+arr[3]+"<"+arr[5]+";"+arr[3]+"="+arr[3]+"+"+arr[6]+")";
+
     }
 
     public void startBracket()
