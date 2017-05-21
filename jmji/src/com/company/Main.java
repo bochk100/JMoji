@@ -33,16 +33,16 @@ public class Main {
 
         //right now this only outputs a file, but does nothing more.
         String code = worker.getFinalCode();
-        code+="}\n}";
+        code += "}\n";
         try{
-            PrintWriter writer = new PrintWriter("C:\\Users\\Sophie\\Desktop\\JMoji\\jmji\\src\\com\\company\\emojicode.java", "UTF-8");
+            PrintWriter writer = new PrintWriter("src\\com\\company\\emojicode.java", "UTF-8");
             writer.println(code);
             writer.close();
         } catch (IOException e) {
             // do something
         }
 
-        emojicode.main(args);
+        //emojicode.main(args);
 
     }
 }
@@ -55,7 +55,7 @@ class JMoji
 
     public JMoji()
     {
-        finalCode = "package com.company;\npublic class emojicode {\npublic static void main (String args[])\n{\n";
+        finalCode = "package com.company;\npublic class emojicode {\n";
         identifiers = new ArrayList<idCollector>();
     }
 
@@ -103,7 +103,16 @@ class JMoji
                     break;
                 //Method declarations
                 // case "void":
-
+                case "hole":
+                    createVoid(splitArr,lineCounter);
+                    break;
+                //brackets
+                case "last_quarter_moon_with_face":
+                    startBracket();
+                    break;
+                case "first_quarter_moon_with_face":
+                    endBracket();
+                    break;
                 //other functions
                 case "printer":
                     printOut(splitArr, lineCounter);
@@ -318,6 +327,38 @@ class JMoji
             System.out.println("ERROR AT LINE "+lineCounter);
         }
     }
+
+    public void startBracket()
+    {
+        finalCode+="{\n";
+    }
+
+    public void endBracket()
+    {
+        finalCode+="}\n";
+    }
+
+    public void createVoid(String[] arr, int lineCounter)
+    {
+        if(arr.length>3)
+        {
+            System.out.println("INVALID METHOD DECLARATION AT LINE "+lineCounter);
+        }
+        else
+        {
+            if(arr.length==2)
+            {
+                finalCode+="public static void main (String args[])\n";
+            }
+            else
+            {
+                System.out.println("IINVALID METHOD DECLARATION AT LINE "+lineCounter);
+            }
+
+        }
+
+    }
+
 
 
 
