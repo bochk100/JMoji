@@ -30,6 +30,11 @@ The basic declaration of a main method is as follows:<br>
     //your code here.<br>
   🌛<br>
 <br>
+Assign values using 🌈. To declare:<br>
+☯🌵🌈⚪<br>
+And to reassign, just omit the primitive type declaration. <br>
+🌵🌈⚫<br>
+
 Loop declarations are as follows:<br>
   🔁🍬0:10:1<br>
   🌜<br>
@@ -56,3 +61,5 @@ for loop: 🔁<br>
 
 *other*<br>
 print to console: 🖨<br>
+true: ⚪<br>
+false: ⚫<br>
