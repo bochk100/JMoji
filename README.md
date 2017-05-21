@@ -29,7 +29,7 @@ The basic declaration of a main method is as follows:<br>
   🌜<br>
     //your code here.<br>
   🌛<br>
-
+<br>
 Loop declarations are as follows:<br>
   🔁🍬0:10:1<br>
   🌜<br>
@@ -37,21 +37,22 @@ Loop declarations are as follows:<br>
   🌛<br>
 (Which translates to for(int candy = 0; candy < 10; candy = candy +1) )<br>
 
-3. List of Tokens
+3. List of Tokens<br>
+<br>
 *primitives*<br>
 bool: ☯️<br>
 int: 🔢<br>
-<br>
+<br><br>
 *declarations*<br>
 equals(=): 🌈<br>
-<br>
+<br><br>
 *methods*<br>
 void = 🕳<br>
 open bracket ("{"): 🌜<br>
 closed bracket ("}"): 🌛<br>
-<br>
+<br><br>
 *loops*<br>
 for loop: 🔁<br>
-<br>
+<br><br>
 *other*<br>
 print to console: 🖨<br>
