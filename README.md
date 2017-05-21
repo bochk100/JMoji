@@ -25,10 +25,10 @@ Because of the extensive use of emojis, a text editor with emoji functionality m
 
 Overall, the basic rules of Java apply.
 The basic declaration of a main method is as follows:
-  🕳
-  🌜
-    //your code here.
-  🌛
+  🕳<br>
+  🌜<br>
+    //your code here.<br>
+  🌛<br>
 
 Loop declarations are as follows:
   🔁🍬0:10:1
