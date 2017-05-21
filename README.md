@@ -24,34 +24,34 @@ Because of the extensive use of emojis, a text editor with emoji functionality m
 2. Using the Language
 
 Overall, the basic rules of Java apply.
-The basic declaration of a main method is as follows:
+The basic declaration of a main method is as follows:<br>
   🕳<br>
   🌜<br>
     //your code here.<br>
   🌛<br>
 
-Loop declarations are as follows:
-  🔁🍬0:10:1
-  🌜
-    //your code here.
-  🌛
-(Which translates to for(int candy = 0; candy < 10; candy = candy +1) )
+Loop declarations are as follows:<br>
+  🔁🍬0:10:1<br>
+  🌜<br>
+    //your code here.<br>
+  🌛<br>
+(Which translates to for(int candy = 0; candy < 10; candy = candy +1) )<br>
 
 3. List of Tokens
-*primitives*
-bool: ☯️
-int: 🔢
-
-*declarations*
-equals(=): 🌈
-
-*methods*
-void = 🕳
-open bracket ("{"): 🌜
-closed bracket ("}"): 🌛
-
-*loops*
-for loop: 🔁
-
-*other*
-print to console: 🖨
+*primitives*<br>
+bool: ☯️<br>
+int: 🔢<br>
+<br>
+*declarations*<br>
+equals(=): 🌈<br>
+<br>
+*methods*<br>
+void = 🕳<br>
+open bracket ("{"): 🌜<br>
+closed bracket ("}"): 🌛<br>
+<br>
+*loops*<br>
+for loop: 🔁<br>
+<br>
+*other*<br>
+print to console: 🖨<br>
