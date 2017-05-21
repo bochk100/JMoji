@@ -11,7 +11,10 @@ For a sample output of the code, please check out test.jmj.
 2. Using the language.
 3. List of tokens.
 
+******
+
 1. JMoji Basics
+
 With the exception of tokens, any emoji can be used as an identifier. Currently, JMoji is limited to the emoji library provided by emoji-java (for a full list, please visit the github linked above), but we are working to encompass all emoji.
 
 JMoji works by converting emojis into java code, which can then be compiled by a JVM. 
