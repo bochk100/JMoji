@@ -83,9 +83,12 @@ class JMoji
                     }
                     else if (identifiers.get(id).getType().equals("integer")) {
                         reassignInt(splitArr, lineCounter);
+						parseArith(splitArr, lineCounter);
                         needID = false;
                         break;
                     }
+					// might need a new identifier or case to call upon parseArith()
+					// could combine parseArith into reassignInt
                 }
             }
         }
@@ -94,13 +97,13 @@ class JMoji
             switch (splitArr[1]) {
                 case "": //System.out.println("Whitespace"); //Ignores whitespace
                     break;
-                //primitves
+                //primitives
                 case "yin_yang":
                     parseBool(splitArr, lineCounter);
                     break;
                 case "1234":
                     parseInt(splitArr, lineCounter);
-                    break;
+                    break
                 //loops
                 case "repeat":
                     forLoop(splitArr,lineCounter);
@@ -229,6 +232,41 @@ class JMoji
             System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
         }
     }
+	
+	// arithmetic methods
+	private void parseArith(String[] splitArr, int lineCounter)
+    {
+        System.out.println("Identified integer.");
+
+        String identifier = splitArr[3]; //should be second
+		Int temp = splitArr[4];
+        //identifiers.add(new idCollector(identifier, "integer"));
+            if(splitArr[2].equals("heavy_plus_sign"))
+            {
+               finalCode += arr[1] 
+                System.out.println(finalCode);
+            }
+			else if(splitArr[2].equals("heavy_minus_sign"))
+            {
+				finalCode += arr[1] +" = " + arr[1] + "-= " + temp;
+                System.out.println(finalCode);
+            }
+            else if(splitArr[2].equals("heavy_multiplication_x"))
+            {
+				finalCode += arr[1] +" = " + arr[1] + "*= " + temp;
+                System.out.println(finalCode);
+            }
+			 else if(splitArr[2].equals("heavy_division_sign"))
+            {
+				finalCode += arr[1] +" = " + arr[1] + "/= " + temp;
+                System.out.println(finalCode);
+            }
+            else
+            {
+                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+            }
+    }
+	
     private void reassignBool(String[] arr, int lineCounter)
     {
         if(arr[3].equals("rainbow"))
