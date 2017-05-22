@@ -230,7 +230,7 @@ class JMoji
             else
             {
                 System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
-                System.out.println("INT MUST BE SET TO 0 THROUGH 9\n");
+                System.out.println("AN INT MUST BE A 0-9\n");
             }
         }
         else
@@ -248,27 +248,27 @@ class JMoji
         //identifiers.add(new idCollector(identifier, "integer"));
             if(splitArr[3].equals("heavy_plus_sign"))
             {
-                finalCode += splitArr[1] +" = " + splitArr[1] + "+= " + temp + ";\n";
+                finalCode += splitArr[1] +" = " + splitArr[1] + "+ " + temp + ";\n";
                 System.out.println(finalCode);
             }
 			else if(splitArr[3].equals("heavy_minus_sign"))
             {
-				finalCode += splitArr[1] +" = " + splitArr[1] + "-= " + temp + ";\n";
+				finalCode += splitArr[1] +" = " + splitArr[1] + "- " + temp + ";\n";
                 System.out.println(finalCode);
             }
             else if(splitArr[3].equals("heavy_multiplication_x"))
             {
-				finalCode += splitArr[1] +" = " + splitArr[1] + "*= " + temp + ";\n";
+				finalCode += splitArr[1] +" = " + splitArr[1] + "* " + temp + ";\n";
                 System.out.println(finalCode);
             }
 			 else if(splitArr[3].equals("heavy_division_sign"))
             {
-				finalCode += splitArr[1] +" = " + splitArr[1] + "/= " + temp + ";\n";
+				finalCode += splitArr[1] +" = " + splitArr[1] + "/ " + temp + ";\n";
                 System.out.println(finalCode);
             }
             else
             {
-                System.out.println("IRNCORRECT SYNTAX AT LINE "+lineCounter);
+                    System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
             }
     }
 	
@@ -289,7 +289,7 @@ class JMoji
             else
             {
                 System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
-                System.out.println("BOOLEAN MUST BE INITIALIZED TO TRUE ⚪ OR FALSE ⚫");
+                System.out.println("BOOLEAN MUST BE INITIALIZED TO ⚪ (TRUE) OR ⚫ (FALSE)");
             }
         }
         else
@@ -406,7 +406,7 @@ class JMoji
             }
             else
             {
-                System.out.println("IINVALID METHOD DECLARATION AT LINE "+lineCounter);
+                System.out.println("INVALID METHOD DECLARATION AT LINE "+lineCounter);
             }
 
         }
