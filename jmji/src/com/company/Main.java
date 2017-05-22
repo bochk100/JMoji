@@ -75,21 +75,27 @@ class JMoji
         for(int id=0;id<identifiers.size();++id)
         {
             if(splitArr[1].equals(identifiers.get(id).getName())) {
+
                 if (splitArr[3].equals("rainbow")) {
                     if (identifiers.get(id).getType().equals("boolean")) {
                         reassignBool(splitArr, lineCounter);
                         needID = false;
                         break;
                     }
-                    else if (identifiers.get(id).getType().equals("integer")) {
-                        reassignInt(splitArr, lineCounter);
-						parseArith(splitArr, lineCounter);
-                        needID = false;
-                        break;
+                }
+                    else if(splitArr[3].equals("heavy_plus_sign") || splitArr[3].equals("heavy_minus_sign") ||
+                            splitArr[3].equals("heavy_multiplication_x") || splitArr[3].equals("heavy_division_signtes")){
+                        System.out.println("IDENTIFIER: "+identifiers.get(id).getName());
+                        if(identifiers.get(id).getType().equals("integer")) {
+                            reassignInt(splitArr, lineCounter);
+                            parseArith(splitArr, lineCounter);
+                            needID = false;
+                            break;
+                            }
                     }
 					// might need a new identifier or case to call upon parseArith()
 					// could combine parseArith into reassignInt
-                }
+
             }
         }
 
@@ -103,7 +109,7 @@ class JMoji
                     break;
                 case "1234":
                     parseInt(splitArr, lineCounter);
-                    break
+                    break;
                 //loops
                 case "repeat":
                     forLoop(splitArr,lineCounter);
@@ -236,34 +242,33 @@ class JMoji
 	// arithmetic methods
 	private void parseArith(String[] splitArr, int lineCounter)
     {
-        System.out.println("Identified integer.");
 
         String identifier = splitArr[3]; //should be second
-		Int temp = splitArr[4];
+		int temp = Integer.parseInt(splitArr[4]);
         //identifiers.add(new idCollector(identifier, "integer"));
-            if(splitArr[2].equals("heavy_plus_sign"))
+            if(splitArr[3].equals("heavy_plus_sign"))
             {
-               finalCode += arr[1] 
+                finalCode += splitArr[1] +" = " + splitArr[1] + "+= " + temp + ";\n";
                 System.out.println(finalCode);
             }
-			else if(splitArr[2].equals("heavy_minus_sign"))
+			else if(splitArr[3].equals("heavy_minus_sign"))
             {
-				finalCode += arr[1] +" = " + arr[1] + "-= " + temp;
+				finalCode += splitArr[1] +" = " + splitArr[1] + "-= " + temp + ";\n";
                 System.out.println(finalCode);
             }
-            else if(splitArr[2].equals("heavy_multiplication_x"))
+            else if(splitArr[3].equals("heavy_multiplication_x"))
             {
-				finalCode += arr[1] +" = " + arr[1] + "*= " + temp;
+				finalCode += splitArr[1] +" = " + splitArr[1] + "*= " + temp + ";\n";
                 System.out.println(finalCode);
             }
-			 else if(splitArr[2].equals("heavy_division_sign"))
+			 else if(splitArr[3].equals("heavy_division_sign"))
             {
-				finalCode += arr[1] +" = " + arr[1] + "/= " + temp;
+				finalCode += splitArr[1] +" = " + splitArr[1] + "/= " + temp + ";\n";
                 System.out.println(finalCode);
             }
             else
             {
-                System.out.println("INCORRECT SYNTAX AT LINE "+lineCounter);
+                System.out.println("IRNCORRECT SYNTAX AT LINE "+lineCounter);
             }
     }
 	

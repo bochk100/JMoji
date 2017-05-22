@@ -6,7 +6,7 @@ int snowflake = 1;
 for(int candy=0;candy<10;candy=candy+2){
 System.out.println(snowflake);
 }
-snowflake = 5;
+snowflake = snowflake+= 2;
 boolean cactus = true;
 cactus = false;
 System.out.println(cactus);
